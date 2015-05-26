@@ -2,14 +2,14 @@
   if (typeof Asteroids === "undefined") {
     window.Asteroids = {};
   }
-  function Asteroid (hash) {
+  Asteroids.Asteroid = function (hash) {
     hash["color"] = Asteroids.Util.randomColor();
-    hash["vel"] = [(Math.random() * 2 -1 ), (Math.random() * 2 - 1)];
-    hash["radius"] = 1;
-    Asteroids.movingObject.call(this, hash);
-  }
+    hash["vel"] = [(Math.random() * 2 -1 ) * 2, (Math.random() * 2 - 1) * 2];
+    hash["radius"] = 20;
+    Asteroids.MovingObject.call(this, hash);
+  };
 
-  Asteroids.Util.inherits(Asteroid, Asteroids.movingObject);
+  Asteroids.Util.inherits(Asteroids.Asteroid, Asteroids.MovingObject);
 
 
 })();

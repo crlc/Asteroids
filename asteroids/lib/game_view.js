@@ -12,8 +12,19 @@
   };
 
   GameView.prototype.start = function(){
-    setInterval(this.game.moveObjects, 20);
-    setInterval(this.game.draw, 20);
+    window.setInterval((function(){
+      console.log(this.ctx);
+      this.game.step();
+      this.game.draw(this.ctx);
+    }).bind(this), 20);
+
+  };
+
+  GameView.prototype.bindKeyHandlers(){
+    key('w', this.game.ship.power([-1,0]));
+    key('s', this.game.ship.power([1,0]));
+    key('a', this.game.ship.power([0,-1]));
+    key('d', this.game.ship.power([0,1]));
 
   }
 })();
