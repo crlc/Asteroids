@@ -5,7 +5,7 @@
  *  evidence.js is freely distributable under the terms of an MIT-style license.
  *--------------------------------------------------------------------------*/
 
-(function(global) {
+(function (global) {
   var originalEvidence = global.Evidence,
       originalOnload   = global.onload;
 
@@ -37,7 +37,7 @@ function chain(subclass, superclass) {
 
 function defer(block, context) {
   if ('setTimeout' in global) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       block.call(context);
     }, 10);
   } else {
@@ -50,7 +50,7 @@ function AssertionSkippedError(message) {
 
 AssertionSkippedError.displayName = 'AssertionSkippedError';
 
-(function(p) {
+(function (p) {
   p.name = 'AssertionSkippedError';
 })(AssertionSkippedError.prototype);
 Evidence.AssertionSkippedError = AssertionSkippedError;
@@ -62,7 +62,7 @@ function AssertionFailedError(message, template, args) {
 
 AssertionFailedError.displayName = 'AssertionFailedError';
 
-(function(p) {
+(function (p) {
   p.name = 'AssertionFailedError';
 })(AssertionFailedError.prototype);
 Evidence.AssertionFailedError = AssertionFailedError;
@@ -74,7 +74,7 @@ function AssertionMessage(message, template, args) {
 
 AssertionMessage.displayName = 'AssertionMessage';
 
-(function(p) {
+(function (p) {
   function toString() {
     return UI.printf(this.message + this.template, this.args);
   }
@@ -82,10 +82,10 @@ AssertionMessage.displayName = 'AssertionMessage';
 })(AssertionMessage.prototype);
 Evidence.AssertionMessage = AssertionMessage;
 
-var Assertions = (function() {
+var Assertions = (function () {
   function _assertExpression(expression, message, template) {
     /*for (var i=0; i < 100000; i++) {
-      (function(){})()
+      (function () {})()
     }*/
     if (expression) {
       this.addAssertion();
@@ -257,7 +257,7 @@ function TestCase(methodName) {
   this.name = methodName;
 }
 
-(function() {
+(function () {
   function extend(name, methods) {
     function TestCaseSubclass(methodName) {
       TestCase.call(this, methodName);
@@ -290,7 +290,7 @@ function TestCase(methodName) {
   TestCase.defaultTimeout = 10000;
 })();
 
-(function(p) {
+(function (p) {
   function run(result) {
     if (result) { this._result = result; }
     try {
@@ -316,7 +316,7 @@ function TestCase(methodName) {
         } finally {
           this._nextAssertions = null;
           this._result.stopTest(this);
-          defer(function() {
+          defer(function () {
             this.parent.next();
           }, this);
         }
@@ -342,8 +342,8 @@ function TestCase(methodName) {
     this._paused = true;
     var self = this;
     if (assertions) { this._nextAssertions = assertions; }
-    self._timeoutId = global.setTimeout(function() {
-      self.resume(function() {
+    self._timeoutId = global.setTimeout(function () {
+      self.resume(function () {
         self.fail('Test timed out. Testing was not resumed after being paused.');
       });
     }, TestCase.defaultTimeout);
@@ -377,8 +377,8 @@ function TestCase(methodName) {
   p.resume           = resume;
   p.size             = size;
   p.toString         = toString;
-  p.setUp            = function() {};
-  p.tearDown         = function() {};
+  p.setUp            = function () {};
+  p.tearDown         = function () {};
 })(TestCase.prototype);
   Evidence.TestCase = TestCase;
 function TestSuite(name, tests) {
@@ -391,7 +391,7 @@ function TestSuite(name, tests) {
 
 TestSuite.displayName = 'TestSuite';
 
-(function(p) {
+(function (p) {
   function run(result) {
     this._index = 0;
     this._result = result;
@@ -465,7 +465,7 @@ function TestRunner() {
 
 TestRunner.displayName = 'TestRunner';
 
-(function(p) {
+(function (p) {
   function run(suite) {
     suite.parent = null;
     var result = this._makeResult();
@@ -487,7 +487,7 @@ function TestLoader() {
 
 TestLoader.displayName = 'TestLoader';
 
-(function(p) {
+(function (p) {
   function loadTestsFromTestCase(testcaseClass) {
     var suite = new TestSuite(testcaseClass.displayName),
         props = this.getTestCaseNames(testcaseClass);
@@ -545,7 +545,7 @@ function AutoRunner() {
   this.runner    = ConsoleTestRunner;
 }
 
-(function() {
+(function () {
   function run(options) {
     var autoRunner = new this();
     options = options || autoRunner.retrieveOptions();
@@ -566,7 +566,7 @@ function AutoRunner() {
   };
 })();
 
-(function(p) {
+(function (p) {
   function run() {
     var logger = new this.logger(this.verbosity),
         runner = new this.runner(logger),
@@ -671,7 +671,7 @@ function TestResult() {
 
 TestResult.displayName = 'TestResult';
 
-(function(p) {
+(function (p) {
   function addAssertion() {
     this.assertionCount++;
   }
@@ -753,7 +753,7 @@ Logger.INFO     = 2;
 Logger.DEBUG    = 1;
 Logger.NOTSET   = 0;
 
-(function(p) {
+(function (p) {
   function critical(template, params) {
     this.log(Logger.CRITICAL, template, params);
   }
@@ -809,7 +809,7 @@ function PopupLogger(level) {
 chain(PopupLogger, Logger);
 PopupLogger.displayName = 'PopupLogger';
 
-(function(p) {
+(function (p) {
   var BASIC_STYLES = 'color: #333; background-color: #fff; font-family: monospace; border-bottom: 1px solid #ccc;';
   var STYLES = {
     WARN:     'color: #000; background-color: #fc6;',
@@ -882,7 +882,7 @@ function CommandLineLogger(level) {
 chain(CommandLineLogger, Logger);
 CommandLineLogger.displayName = 'CommandLineLogger';
 
-(function(p) {
+(function (p) {
 
   function log(level, msg, params) {
     level = level || Logger.NOTSET;
@@ -909,7 +909,7 @@ function ConsoleTestRunner(logger) {
 chain(ConsoleTestRunner, TestRunner);
 ConsoleTestRunner.displayName = 'ConsoleTestRunner';
 
-(function(p) {
+(function (p) {
   function _makeResult() {
     return new ConsoleTestResult(this.logger);
   }
@@ -925,7 +925,7 @@ function ConsoleTestResult(logger) {
 chain(ConsoleTestResult, TestResult);
 ConsoleTestResult.displayName = 'ConsoleTestResult';
 
-(function(p) {
+(function (p) {
   var _super = TestResult.prototype;
 
   function addAssertion() {
@@ -999,7 +999,7 @@ ConsoleTestResult.displayName = 'ConsoleTestResult';
 
 
 Console.TestResult = ConsoleTestResult;
-var UI = (function() {
+var UI = (function () {
   function printf(template, args, inspector) {
     var parts = [],
         regexp = /(^%|.%)([a-zA-Z])/,
@@ -1042,7 +1042,7 @@ var UI = (function() {
   global.Evidence = Evidence;
 
   if (global.location) {
-    global.onload = function() {
+    global.onload = function () {
       if (typeof originalOnload === 'function') {
         originalOnload.call(global);
       }
@@ -1050,7 +1050,7 @@ var UI = (function() {
     };
   } else if (global.arguments) {
     var runtime = java.lang.Runtime.getRuntime();
-    var thread = new java.lang.Thread(function() {
+    var thread = new java.lang.Thread(function () {
       AutoRunner.run();
     });
     runtime.addShutdownHook(thread);

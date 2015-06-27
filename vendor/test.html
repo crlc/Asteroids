@@ -33,33 +33,33 @@
   </p>
 
   <script>
-    key('c', 'issues', function(){
+    key('c', 'issues', function () {
      console.log('c/issues');
     });
 
-    key('command+r, ctrl+r', 'issues', function(){
+    key('command+r, ctrl+r', 'issues', function () {
       console.log('Hijacked Command+R or Ctrl+R, damn!');
       return false;
     });
     
-    key('i', function(){
+    key('i', function () {
       key.setScope('issues');
       console.log('Switched to "issues" scope. Command+R or Ctrl+R is now no longer reloading...');
     });
     
-    key('i', function(){
+    key('i', function () {
       console.log('(example of multiple assignment)');
     });
 
-    key('o, enter, left', function(){
+    key('o, enter, left', function () {
       console.log('o, enter or left pressed!');
     });
 
-    key('ctrl+c', function(){
+    key('ctrl+c', function () {
       console.log('this is not the command line');
     });
 
-    key('⌘+right,shift+left,ctrl+shift+alt+d', function(event){
+    key('⌘+right,shift+left,ctrl+shift+alt+d', function (event){
       console.log('command+right, or shift+left, or ctrl+shift+alt+d');
       console.log('here is the event: ', event);
       console.log('key.control', key.control);
@@ -70,13 +70,13 @@
       return false; // prevent default && stop propagation
     });
 
-    key('⌘+x, ctrl+x', function(event, handler){
+    key('⌘+x, ctrl+x', function (event, handler){
       console.log(handler.shortcut, handler.scope);
       return false;
     });
 
-    key('/', function(){ console.log('/') });
-    key('shift+]', function(){ console.log('shift+]') });
+    key('/', function () { console.log('/') });
+    key('shift+]', function () { console.log('shift+]') });
 
     setInterval(function () { 
         console.log('All keys currently down: ' + key.getPressedKeyCodes());
@@ -85,7 +85,7 @@
         }
     }, 1000);
 
-    // document.onkeydown = function(event){
+    // document.onkeydown = function (event){
     //  console.log(event.keyCode);
     // }
   </script>

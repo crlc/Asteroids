@@ -2,7 +2,7 @@
 //     (c) 2011-2013 Thomas Fuchs
 //     keymaster.js may be freely distributed under the MIT license.
 
-;(function(global){
+;(function (global){
   var k,
     _handlers = {},
     _mods = { 16: false, 18: false, 17: false, 91: false },
@@ -29,7 +29,7 @@
       ';': 186, '\'': 222,
       '[': 219, ']': 221, '\\': 220
     },
-    code = function(x){
+    code = function (x){
       return _MAP[x] || x.toUpperCase().charCodeAt(0);
     },
     _downKeys = [];
@@ -260,11 +260,11 @@
     if (object.addEventListener)
       object.addEventListener(event, method, false);
     else if(object.attachEvent)
-      object.attachEvent('on'+event, function(){ method(window.event) });
+      object.attachEvent('on'+event, function () { method(window.event) });
   };
 
   // set the handlers globally on document
-  addEvent(document, 'keydown', function(event) { dispatch(event) }); // Passing _scope to a callback to ensure it remains the same by execution. Fixes #48
+  addEvent(document, 'keydown', function (event) { dispatch(event) }); // Passing _scope to a callback to ensure it remains the same by execution. Fixes #48
   addEvent(document, 'keyup', clearModifier);
 
   // reset modifiers to false whenever the window is (re)focused.

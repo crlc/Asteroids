@@ -56,9 +56,9 @@
     };
 
     Evidence.TestCase.extend('KeymasterTest', {
-      testShortcut: function(t){
+      testShortcut: function (t){
         var cnt = 0;
-        key('a', function(){ cnt++ });
+        key('a', function () { cnt++ });
         keydown(65);
         keyup(65);
         t.assertEqual(1, cnt);
@@ -67,9 +67,9 @@
         t.assertEqual(2, cnt);
       },
 
-      testUnbind: function(t){
+      testUnbind: function (t){
         var cnt = 0;
-        key('a', function(){ cnt++ });
+        key('a', function () { cnt++ });
         keydown(65);
         keyup(65);
         t.assertEqual(1, cnt);
@@ -79,13 +79,13 @@
         t.assertEqual(1, cnt);
       },
 
-      testShortcutWithModifiers: function(t){
+      testShortcutWithModifiers: function (t){
         var cntA = 0, cntShiftA = 0, cntCtrlShiftA = 0, cntCommandCtrlShiftA = 0, cntCommandCtrlAltShiftA = 0;
-        key('a', function(){ cntA++ });
-        key('shift+a', function(){ cntShiftA++ });
-        key('ctrl+shift+a', function(){ cntCtrlShiftA++ });
-        key('command+ctrl+shift+a', function(){ cntCommandCtrlShiftA++ });
-        key('command+ctrl+alt+shift+a', function(){ cntCommandCtrlAltShiftA++ });
+        key('a', function () { cntA++ });
+        key('shift+a', function () { cntShiftA++ });
+        key('ctrl+shift+a', function () { cntCtrlShiftA++ });
+        key('command+ctrl+shift+a', function () { cntCommandCtrlShiftA++ });
+        key('command+ctrl+alt+shift+a', function () { cntCommandCtrlAltShiftA++ });
 
         keydown(65); keyup(65);
         t.assertEqual(1, cntA);
@@ -127,13 +127,13 @@
         t.assertEqual(1, cntCommandCtrlAltShiftA);
       },
 
-      testUnbindWithModifiers: function(t){
+      testUnbindWithModifiers: function (t){
         var cntA = 0, cntShiftA = 0, cntCtrlShiftA = 0, cntCommandCtrlShiftA = 0, cntCommandCtrlAltShiftA = 0;
-        key('a', function(){ cntA++ });
-        key('shift+a', function(){ cntShiftA++ });
-        key('ctrl+shift+a', function(){ cntCtrlShiftA++ });
-        key('command+ctrl+shift+a', function(){ cntCommandCtrlShiftA++ });
-        key('command+ctrl+alt+shift+a', function(){ cntCommandCtrlAltShiftA++ });
+        key('a', function () { cntA++ });
+        key('shift+a', function () { cntShiftA++ });
+        key('ctrl+shift+a', function () { cntCtrlShiftA++ });
+        key('command+ctrl+shift+a', function () { cntCommandCtrlShiftA++ });
+        key('command+ctrl+alt+shift+a', function () { cntCommandCtrlAltShiftA++ });
 
         keydown(65); keyup(65);
         keydown(KEYS.shift); keydown(65, [16]); keyup(65); keyup(KEYS.shift);
@@ -174,11 +174,11 @@
         t.assertEqual(1, cntCommandCtrlAltShiftA);
       },
 
-      testUnbindWithModifiersMultiple: function(t){
+      testUnbindWithModifiersMultiple: function (t){
         var cntA = 0, cntShiftA = 0, cntCtrlShiftA = 0;
-        key('a', function(){ cntA++ });
-        key('shift+a', function(){ cntShiftA++ });
-        key('ctrl+shift+a', function(){ cntCtrlShiftA++ });
+        key('a', function () { cntA++ });
+        key('shift+a', function () { cntShiftA++ });
+        key('ctrl+shift+a', function () { cntCtrlShiftA++ });
 
         keydown(65); keyup(65);
         keydown(KEYS.shift); keydown(65, [16]); keyup(65); keyup(KEYS.shift);
@@ -199,9 +199,9 @@
         t.assertEqual(1, cntCtrlShiftA);
       },
 
-      testUnbindWithKeysMultiple: function(t){
+      testUnbindWithKeysMultiple: function (t){
         var cntSlashF = 0;
-        key('/, f', function(){ cntSlashF++ });
+        key('/, f', function () { cntSlashF++ });
 
         keydown(191); keyup(191);
         keydown(70); keyup(70);
@@ -216,12 +216,12 @@
         t.assertEqual(2, cntSlashF);
       },
 
-      testFancyModifierKeys: function(t){
+      testFancyModifierKeys: function (t){
         var sequence = '';
-        key('⌃+a', function(){ sequence += 'a' });
-        key('⌥+b', function(){ sequence += 'b' });
-        key('⇧+c', function(){ sequence += 'c' });
-        key('⌘+d', function(){ sequence += 'd' });
+        key('⌃+a', function () { sequence += 'a' });
+        key('⌥+b', function () { sequence += 'b' });
+        key('⇧+c', function () { sequence += 'c' });
+        key('⌘+d', function () { sequence += 'd' });
 
         keydown(KEYS.ctrl); keydown(65, [17]); keyup(65); keyup(KEYS.ctrl);
         keydown(KEYS.option); keydown(66, [18]); keyup(66); keyup(KEYS.option);
@@ -231,7 +231,7 @@
         t.assertEqual('abcd', sequence);
       },
 
-      testNonAlphanumericKeys: function(t){
+      testNonAlphanumericKeys: function (t){
         var sequence = '', character,
           keys = { ',': 188, '.': 190, '/': 191,
             '`': 192, '-': 189, '=': 187,
@@ -239,8 +239,8 @@
             '[': 219, ']': 221, '\\': 220 };
 
         for(character in keys){
-          key(character, (function(character){
-            return function(){ sequence += character }
+          key(character, (function (character){
+            return function () { sequence += character }
           })(character));
           keydown(keys[character]); keyup(keys[character]);
         }
@@ -248,10 +248,10 @@
         t.assertEqual(',./`-=;\'[]\\', sequence);
       },
 
-      testFKeys: function(t) {
+      testFKeys: function (t) {
         var sequence = '';
         for(var i=1;i<=19;i++) {
-          key('f' + i , function(){ sequence += '' + i });
+          key('f' + i , function () { sequence += '' + i });
         }
 
         for(var i=1;i<=19;i++) {
@@ -262,28 +262,28 @@
         t.assertEqual('12345678910111213141516171819', sequence);
       },
 
-      testNamedSpecialKeys: function(t){
+      testNamedSpecialKeys: function (t){
         // TODO
       },
 
-      testEventCancelling: function(t){
+      testEventCancelling: function (t){
         // TODO
       },
 
-      testEventArguments: function(t){
+      testEventArguments: function (t){
         // TODO
       },
 
-      testModifierBooleans: function(t){
+      testModifierBooleans: function (t){
         // TODO
       },
 
-      testScoping: function(t){
+      testScoping: function (t){
         var sequence = '';
 
-        key('a', function(){ sequence += 'a' });
-        key('b', function(){ sequence += 'b' });
-        key('b', 'capital', function(){ sequence += 'B' });
+        key('a', function () { sequence += 'a' });
+        key('b', function () { sequence += 'b' });
+        key('b', 'capital', function () { sequence += 'B' });
 
         keydown(65); keyup(65);
         key.setScope('capital');
@@ -299,8 +299,8 @@
         // it should not call second callback after changing scope in one of callbacks
         var sequence = '';
 
-        key('c', 'a', function(){ sequence += 'a'; key.setScope('b');  });
-        key('c', 'b', function(){ sequence += 'b'; });
+        key('c', 'a', function () { sequence += 'a'; key.setScope('b');  });
+        key('c', 'b', function () { sequence += 'b'; });
 
         key.setScope('a');
         keydown(67); keyup(67);
@@ -310,13 +310,13 @@
         t.assertEqual('ab', sequence);
       },
 
-      testDeleteScope: function(t){
+      testDeleteScope: function (t){
         var sequence = '';
 
-        key('a', function(){ sequence += 'a' });
-        key('b', function(){ sequence += 'b' });
-        key('a', 'capital', function(){ sequence += 'A' });
-        key('b', 'capital', function(){ sequence += 'B' });
+        key('a', function () { sequence += 'a' });
+        key('b', function () { sequence += 'b' });
+        key('a', 'capital', function () { sequence += 'A' });
+        key('b', 'capital', function () { sequence += 'B' });
 
         keydown(65); keyup(65);
         keydown(66); keyup(66);
@@ -330,10 +330,10 @@
         t.assertEqual('abaAbBab', sequence);
       },
 
-      testUnbindWithScope: function(t){
+      testUnbindWithScope: function (t){
         var cntIssues = 0, cntFiles = 0;
-        key('a', 'issues', function(){ cntIssues++ });
-        key('a', 'files', function(){ cntFiles++ });
+        key('a', 'issues', function () { cntIssues++ });
+        key('a', 'files', function () { cntFiles++ });
 
         key.setScope('issues');
         keydown(65);
@@ -355,19 +355,19 @@
         t.assertEqual(1, cntIssues);
       },
 
-      testDoesntFireOnUserInputElements: function(t){
+      testDoesntFireOnUserInputElements: function (t){
         // TODO
       },
 
-      testCallsFilterFunction: function(t){
+      testCallsFilterFunction: function (t){
         var oldFilter = key.filter, filterCalls = 0, keyCalls = 0;
 
-        key.filter = function(event){
+        key.filter = function (event){
           filterCalls++;
           return false;
         }
 
-        key('a', function(){ keyCalls++; });
+        key('a', function () { keyCalls++; });
         keydown(65); keyup(65);
 
         t.assertEqual(1, filterCalls);
@@ -404,11 +404,11 @@
         keyup(65); keyup(KEYS.shift);
       },
 
-      testNoConflict: function(t) {
+      testNoConflict: function (t) {
         var k = key.noConflict();
         t.assertEqual(undefined, window.key);
         var called = false;
-        k('a', function() {
+        k('a', function () {
           called = true;
         });
         keydown(65); keyup(65);
@@ -416,20 +416,20 @@
         window.key = k;
       },
 
-      testScopeChangeDuringFilter: function(t) {
+      testScopeChangeDuringFilter: function (t) {
         var oldFilter = key.filter
           , scope1Pressed = 0
           , scope2Pressed = 0;
 
-        key('a', 'scope1', function() {
+        key('a', 'scope1', function () {
           ++scope1Pressed;
         });
 
-        key('a', 'scope2', function() {
+        key('a', 'scope2', function () {
           ++scope2Pressed;
         });
 
-        key.filter = function() {
+        key.filter = function () {
           key.setScope('scope1');
           return true;
         };
@@ -438,7 +438,7 @@
         keyup(65);
         t.assertTrue(scope1Pressed === 1);
 
-        key.filter = function() {
+        key.filter = function () {
           key.setScope('scope2');
           return true;
         };

@@ -31,13 +31,13 @@ called directly.
 
 ```javascript
 // define short of 'a'
-key('a', function(){ alert('you pressed a!') });
+key('a', function () { alert('you pressed a!') });
 
 // returning false stops the event and prevents default browser events
-key('ctrl+r', function(){ alert('stopped reload!'); return false });
+key('ctrl+r', function () { alert('stopped reload!'); return false });
 
 // multiple shortcuts that do the same thing
-key('⌘+r, ctrl+r', function(){ });
+key('⌘+r, ctrl+r', function () { });
 ```
 
 The handler method is called with two arguments set, the keydown `event` fired, and
@@ -47,7 +47,7 @@ an object containing, among others, the following two properties:
 `scope`: a string describing the scope (or `all`)
 
 ```javascript
-key('⌘+r, ctrl+r', function(event, handler){
+key('⌘+r, ctrl+r', function (event, handler){
   console.log(handler.shortcut, handler.scope);
 });
 
@@ -103,8 +103,8 @@ Keymaster supports switching between scopes. Use the `key.setScope` method to se
 
 ```javascript
 // define shortcuts with a scope
-key('o, enter', 'issues', function(){ /* do something */ });
-key('o, enter', 'files', function(){ /* do something else */ });
+key('o, enter', 'issues', function () { /* do something */ });
+key('o, enter', 'files', function () { /* do something else */ });
 
 // set the scope (only 'all' and 'issues' shortcuts will be honored)
 key.setScope('issues'); // default scope is 'all'
@@ -134,7 +134,7 @@ If you only want _some_ shortcuts to work while in an input element, you can cha
 Don't forget to return `true` so the any shortcuts get processed.
 
 ```javascript
-key.filter = function(event){
+key.filter = function (event){
   var tagName = (event.target || event.srcElement).tagName;
   key.setScope(/^(INPUT|TEXTAREA|SELECT)$/.test(tagName) ? 'input' : 'other');
   return true;
@@ -151,7 +151,7 @@ You can call ```key.noConflict``` to remove the ```key``` function from global s
 
 ```javascript
 var k = key.noConflict();
-k('a', function() { /* ... */ });
+k('a', function () { /* ... */ });
 
 key()
 // --> TypeError: 'undefined' is not a function
